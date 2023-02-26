@@ -9,7 +9,26 @@ This repository contains study material, Lecture slides, Lab notes and instructi
 ## Topics taught in class:
 1. Introduction
 2. Modeling
+  a. Difference Equations
+  b. Hybrid automata
+  c. Labeled transitions systems
+  d. Behaivior
+  e. Parallel, Serial and feedback composition
 3. Low-level Specifications
+  a. Stability
 4. High-level Specifications
-5. Abstraction based Synthesis
+  a. Invariance
+  b. Reachability
+  c. Linear Temporal Logic 
+  d. Signal Temporal Logic
+5. Formal Verification
+  a. Lyapunov Theory
+  b. Rechability analysis
+  c. Barrier Certificate
+  d. Model Checking
+6. Abstraction based Synthesis
+  a. Abstraction based Synthesis
+  b. Control Barrier Certificate
+  c. Funnel based control
+  d. Sampling based motion planning
 
