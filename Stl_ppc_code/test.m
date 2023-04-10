@@ -58,20 +58,23 @@ if (err_plot == 1)
 
    sz_stl_array = size(stl);
    sz_stl = sz_stl_array(2);
-
+   j = 1;
+   k = 1;
    for i=1:size(t)
       [gamma_h,~] = gamma_h_calc(stl,t(i),x_obj_i);
       [h,~] = stl2ppc(stl,t(i),[y(i,1);y(i,2);y(i,3)]);
       gamma_h_vec(:,i) = diag(gamma_h);
       h_vec(:,i) = h;
       if t(i)<=10
-         t1(i) = t(i);
-         h_plot1(i) = h_vec(1,i);
-         gamma_h_plot1(i) = gamma_h_vec(1,i);
+         t1(j) = t(i);
+         h_plot1(j) = h_vec(1,i);
+         gamma_h_plot1(j) = gamma_h_vec(1,i);
+         j = j+1;
       elseif t(i) > 10
-        t2(i-size(t1)) = t(i);
-        h_plot2(i-size(t1)) = h_vec(2,i);
-        gamma_h_plot2(i-size(t1)) = gamma_h_vec(2,i);
+        t2(k) = t(i);
+        h_plot2(k) = h_vec(2,i);
+        gamma_h_plot2(k) = gamma_h_vec(2,i);
+        k = k+1;
       end
    end
    gamma_h_plot_neg1 = -1*gamma_h_plot1;
