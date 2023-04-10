@@ -5,7 +5,7 @@ gamma_v_inf = zeros(1,3);
 gamma_v_vec = zeros(1,3);
 
 l = 0.2;
-alpha_1 = 50;
+alpha_1 = 10;
 alpha_2 = 1;
 
 for i = 1:3
