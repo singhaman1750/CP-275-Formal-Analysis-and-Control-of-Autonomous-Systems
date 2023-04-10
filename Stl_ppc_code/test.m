@@ -79,6 +79,7 @@ if (err_plot == 1)
 
 plot(t1,gamma_h_plot1,'r',t1,gamma_h_plot_neg1,'r',t1,h_plot1,'b');hold on
 plot(t2,gamma_h_plot2,'r',t2,gamma_h_plot_neg2,'r',t2,h_plot2,'b');
+pause(5);
 
 % Plotting the manipulators
 x_obj = y(:,1);
@@ -147,12 +148,20 @@ if (animate == 1)
     
         % Define the rotation matrix for the square
         R = [cos(theta(i)) -sin(theta(i)); sin(theta(i)) cos(theta(i))];
+        R1 = [cos(stl(1).des_config(3)) -sin(stl(1).des_config(3)); sin(stl(1).des_config(3)) cos(stl(1).des_config(3))];
+        R2 = [cos(stl(2).des_config(3)) -sin(stl(2).des_config(3)); sin(stl(2).des_config(3)) cos(stl(2).des_config(3))];
     
         % Transform the square vertices to the global coordinate frame
-        square_xy = R * [square_x; square_y] + [x_p(i); y_p(i)];
+        square_xy = R * [square_x; square_y] + [x_p(i); y_p(i)];        
+        square_xy_des1 = R1 * [square_x; square_y] + [stl(1).des_config(1);stl(1).des_config(2)];
+        square_xy_des2 = R2 * [square_x; square_y] + [stl(2).des_config(1);stl(2).des_config(2)];
+        
         square_x = square_xy(1,:);
         square_y = square_xy(2,:);
-        
+        square_x_des1 = square_xy_des1(1,:);
+        square_y_des1 = square_xy_des1(2,:);
+        square_x_des2 = square_xy_des2(1,:);
+        square_y_des2 = square_xy_des2(2,:);
         % Manipulator arm
         M1_x  = [M1_j0(i,1) M1_j1(i,1) M1_j2(i,1) M1_j3(i,1)]; 
         M2_x =  [M2_j3(i,1) M2_j2(i,1) M2_j1(i,1) M2_j0(i,1)]; 
@@ -161,14 +170,18 @@ if (animate == 1)
 
         % Plot the square
         plot(square_x, square_y, 'b', 'LineWidth', 2); hold on
-        plot(M1_x, M1_y, 'r', 'LineWidth', 2); 
-        plot(M2_x, M2_y, 'r', 'LineWidth', 2);hold off
+        plot(square_x_des1, square_y_des1, 'r', 'LineWidth', 1);
+        plot(square_x_des2, square_y_des2, 'r', 'LineWidth', 1);
+        plot(M1_x, M1_y,'r','LineWidth', 3); 
+        plot(M2_x, M2_y,'r', 'LineWidth', 3);
+        plot(M1_x, M1_y,'o','MarkerSize', 7, 'MarkerFaceColor', 'r'); 
+        plot(M2_x, M2_y, 'o','MarkerSize', 7, 'MarkerFaceColor', 'r');hold off
         %plot(); % plot the square in blue
-        text(4, 2.5, ['time = ' num2str(t(i))]); % add a text annotation to the plot
+        text(0, 2.5, ['time = ' num2str(t(i))]); % add a text annotation to the plot
         xlabel('x');
         ylabel('y');
         title('Animating a Square Moving and Rotating');
-        xlim([-2, 6]);
+        xlim([-4, 4]);
         ylim([-2, 3.5]);
         drawnow; % update the plot
         pause(0.05); % pause for 50 milliseconds
