@@ -7,7 +7,7 @@ gamma_h_inf = zeros(1,sz_stl);
 gamma_h_vec = zeros(1,sz_stl);
 
 l = 0.5;
-alpha = 50;
+alpha = 5;
 
 for i = 1:sz_stl
 if (i == 1)
