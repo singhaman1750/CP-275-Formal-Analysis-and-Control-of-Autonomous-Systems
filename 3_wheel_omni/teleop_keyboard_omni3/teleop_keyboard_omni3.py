@@ -9,6 +9,7 @@ import math
 from math import pow, atan2, sqrt
 import time
 import numpy as np
+# from phasespace_msgs.msg import Markers
 
 msg = """
 Reading from the keyboard !
@@ -219,6 +220,13 @@ class Omni_robot:
         # when a message of type Pose is received.
         self.sub_x = rospy.Subscriber('/gazebo/model_states', ModelStates, self.update_pose)
 
+	# # Publisher which will publish to the topic '/cmd_vel'.
+        # self.velocity_publisher = rospy.Publisher('/cmd_vel_ad', Twist, queue_size=10)
+	#
+        # # A subscriber to the topic '/turtle1/pose'. self.update_pose is called
+        # # when a message of type Pose is received.
+        # self.pose_subscriber = rospy.Subscriber('/phasespace/markers', Markers, self.update_pose)
+
         self.L = 0.04
         # self.wheel_radius = 0.2
         self.MAX_LIN_SPEED = 20.0
@@ -245,6 +253,23 @@ class Omni_robot:
         self.theta = pose.orientation.z
         self.vx = twist.linear.x
         self.vy = twist.linear.y
+	
+	# Update from markers
+	# # Put the led number as per the position on the robot.
+        # # dyn-> led on the dynamics point of the robot
+        # # ori-> led on the center of the robot
+        # marker_dyn = data.markers[2]
+        # marker_ori = data.markers[3]
+
+        # self.pose.x = round(marker_dyn.x, 4)
+        # self.pose.y = round(marker_dyn.y, 4)
+        
+        # dy = marker_dyn.y - marker_ori.y
+        # dx = marker_dyn.x - marker_ori.x
+        
+        # self.pose.theta = round(atan2(dy, dx), 4)
+
+        # print(self.pose.x, self.pose.y, self.pose.theta)
 
     def euclidean_distance(self, goal_x, goal_y):
         """Euclidean distance between current pose and the goal."""
